@@ -1,0 +1,26 @@
+{
+  "cSpell.words": ["sobel", "stbi"],
+  "files.associations": {
+    "__bit_reference": "cpp",
+    "__hash_table": "cpp",
+    "__split_buffer": "cpp",
+    "__tree": "cpp",
+    "any": "cpp",
+    "array": "cpp",
+    "deque": "cpp",
+    "fstream": "cpp",
+    "list": "cpp",
+    "map": "cpp",
+    "optional": "cpp",
+    "queue": "cpp",
+    "set": "cpp",
+    "sstream": "cpp",
+    "stack": "cpp",
+    "string": "cpp",
+    "tuple": "cpp",
+    "unordered_map": "cpp",
+    "unordered_set": "cpp",
+    "variant": "cpp",
+    "vector": "cpp"
+  }
+}

@@ -24,16 +24,16 @@ jobs:
       matrix:
         config:
           - {
-              name: 'Ubuntu',
-              wasm: 'false',
-              projectRoot: '/home/runner/work/raylib-starter/raylib-starter',
-              artifact: '${{ github.event.pull_request.title }}',
-              os: 'ubuntu-latest',
-              conanBuildType: 'Debug',
-              cc: 'clang',
-              cxx: 'clang++',
-              isRelease: true,
-            }
+            name: 'Ubuntu',
+            wasm: 'false',
+            projectRoot: '/home/runner/work/raylib-starter/raylib-starter',
+            artifact: '${{ github.event.pull_request.title }}',
+            os: 'ubuntu-latest',
+            conanBuildType: 'Debug',
+            cc: 'clang',
+            cxx: 'clang++',
+            isRelease: true,
+          }
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -45,7 +45,7 @@ jobs:
         with:
           json: ${{ toJSON(matrix.config) }}
       - name: Game
-        uses: './.github/workflows/modules/game/lint'
+        uses: './.github/workflows/modules/editor/lint'
       - name: Linting commit
         uses: './.github/workflows/utils/commit'
 
@@ -59,38 +59,38 @@ jobs:
       matrix:
         config:
           - {
-              name: 'Windows',
-              wasm: 'false',
-              projectRoot: 'D:/a/raylib-starter',
-              artifact: '${{ github.event.pull_request.title }}',
-              os: 'windows-latest',
-              conanBuildType: 'Release',
-              cc: 'cl',
-              cxx: 'cl',
-              isRelease: true,
-            }
+            name: 'Windows',
+            wasm: 'false',
+            projectRoot: 'D:/a/raylib-starter',
+            artifact: '${{ github.event.pull_request.title }}',
+            os: 'windows-latest',
+            conanBuildType: 'Release',
+            cc: 'cl',
+            cxx: 'cl',
+            isRelease: true,
+          }
           - {
-              name: 'Ubuntu',
-              wasm: 'false',
-              projectRoot: '/home/runner/work/raylib-starter/raylib-starter',
-              artifact: '${{ github.event.pull_request.title }}',
-              os: 'ubuntu-latest',
-              conanBuildType: 'Release',
-              cc: 'clang',
-              cxx: 'clang++',
-              isRelease: true,
-            }
+            name: 'Ubuntu',
+            wasm: 'false',
+            projectRoot: '/home/runner/work/raylib-starter/raylib-starter',
+            artifact: '${{ github.event.pull_request.title }}',
+            os: 'ubuntu-latest',
+            conanBuildType: 'Release',
+            cc: 'clang',
+            cxx: 'clang++',
+            isRelease: true,
+          }
           - {
-              name: 'MacOS',
-              wasm: 'false',
-              projectRoot: '/Users/runner/work/raylib-starter/raylib-starter',
-              artifact: '${{ github.event.pull_request.title }}',
-              os: 'macos-14',
-              conanBuildType: 'Release',
-              cc: 'clang',
-              cxx: 'clang++',
-              isRelease: true,
-            }
+            name: 'MacOS',
+            wasm: 'false',
+            projectRoot: '/Users/runner/work/raylib-starter/raylib-starter',
+            artifact: '${{ github.event.pull_request.title }}',
+            os: 'macos-14',
+            conanBuildType: 'Release',
+            cc: 'clang',
+            cxx: 'clang++',
+            isRelease: true,
+          }
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -103,13 +103,13 @@ jobs:
           json: ${{ toJSON(matrix.config) }}
       - uses: ./.github/workflows/utils/setup-base-libs
       - name: Game
-        uses: './.github/workflows/modules/game/build'
+        uses: './.github/workflows/modules/editor/build'
       - name: Cpack build
         shell: bash
         run: |
           wm run conan-deploy
           wm run cpack-build -bt ${{ env.conanBuildType }}
-          mv $(pwd)/releases/wind.zip $(pwd)/releases/${{matrix.config.os}}.zip
+          mv $(pwd)/releases/editor.zip $(pwd)/releases/${{matrix.config.os}}.zip
 
       - name: Check if release exists
         id: check_release
@@ -132,38 +132,38 @@ jobs:
       matrix:
         config:
           - {
-              wasm: 'true',
-              name: 'Windows',
-              projectRoot: 'D:/a/raylib-starter',
-              artifact: 'dreich-windows',
-              os: 'windows-latest',
-              conanBuildType: 'Debug',
-              cc: 'emcc',
-              cxx: 'em++',
-              isRelease: false,
-            }
+            wasm: 'true',
+            name: 'Windows',
+            projectRoot: 'D:/a/raylib-starter',
+            artifact: 'dreich-windows',
+            os: 'windows-latest',
+            conanBuildType: 'Debug',
+            cc: 'emcc',
+            cxx: 'em++',
+            isRelease: false,
+          }
           - {
-              wasm: 'true',
-              name: 'Ubuntu',
-              projectRoot: '/home/runner/work/raylib-starter/raylib-starter',
-              artifact: 'dreich-linux',
-              os: 'ubuntu-latest',
-              conanBuildType: 'Debug',
-              cc: 'emcc',
-              cxx: 'em++',
-              isRelease: false,
-            }
+            wasm: 'true',
+            name: 'Ubuntu',
+            projectRoot: '/home/runner/work/raylib-starter/raylib-starter',
+            artifact: 'dreich-linux',
+            os: 'ubuntu-latest',
+            conanBuildType: 'Debug',
+            cc: 'emcc',
+            cxx: 'em++',
+            isRelease: false,
+          }
           - {
-              wasm: 'true',
-              name: 'MacOS',
-              projectRoot: '/Users/runner/work/raylib-starter/raylib-starter',
-              artifact: 'dreich-macos',
-              os: 'macos-14',
-              conanBuildType: 'Debug',
-              cc: 'emcc',
-              cxx: 'em++',
-              isRelease: false,
-            }
+            wasm: 'true',
+            name: 'MacOS',
+            projectRoot: '/Users/runner/work/raylib-starter/raylib-starter',
+            artifact: 'dreich-macos',
+            os: 'macos-14',
+            conanBuildType: 'Debug',
+            cc: 'emcc',
+            cxx: 'em++',
+            isRelease: false,
+          }
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -176,4 +176,4 @@ jobs:
           json: ${{ toJSON(matrix.config) }}
       - uses: ./.github/workflows/utils/setup-base-libs
       - name: Game
-        uses: './.github/workflows/modules/game/build'
+        uses: './.github/workflows/modules/editor/build'

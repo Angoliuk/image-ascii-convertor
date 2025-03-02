@@ -24,16 +24,16 @@ jobs:
       matrix:
         config:
           - {
-              name: 'Ubuntu',
-              wasm: 'false',
-              projectRoot: '/home/runner/work/raylib-starter/raylib-starter',
-              artifact: 'dreich-linux',
-              os: 'ubuntu-latest',
-              conanBuildType: 'Debug',
-              cc: 'clang',
-              cxx: 'clang++',
-              isRelease: false,
-            }
+            name: 'Ubuntu',
+            wasm: 'false',
+            projectRoot: '/home/runner/work/raylib-starter/raylib-starter',
+            artifact: 'dreich-linux',
+            os: 'ubuntu-latest',
+            conanBuildType: 'Debug',
+            cc: 'clang',
+            cxx: 'clang++',
+            isRelease: false,
+          }
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -45,7 +45,7 @@ jobs:
         with:
           json: ${{ toJSON(matrix.config) }}
       - name: Game
-        uses: './.github/workflows/modules/game/lint'
+        uses: './.github/workflows/modules/editor/lint'
       - name: Linting commit
         uses: './.github/workflows/utils/commit'
 
@@ -57,38 +57,38 @@ jobs:
       matrix:
         config:
           - {
-              name: 'Windows',
-              wasm: 'false',
-              projectRoot: 'D:/a/raylib-starter',
-              artifact: 'dreich-windows',
-              os: 'windows-latest',
-              conanBuildType: 'Debug',
-              cc: 'cl',
-              cxx: 'cl',
-              isRelease: false,
-            }
+            name: 'Windows',
+            wasm: 'false',
+            projectRoot: 'D:/a/raylib-starter',
+            artifact: 'dreich-windows',
+            os: 'windows-latest',
+            conanBuildType: 'Debug',
+            cc: 'cl',
+            cxx: 'cl',
+            isRelease: false,
+          }
           - {
-              name: 'Ubuntu',
-              wasm: 'false',
-              projectRoot: '/home/runner/work/raylib-starter/raylib-starter',
-              artifact: 'dreich-linux',
-              os: 'ubuntu-latest',
-              conanBuildType: 'Debug',
-              cc: 'clang',
-              cxx: 'clang++',
-              isRelease: false,
-            }
+            name: 'Ubuntu',
+            wasm: 'false',
+            projectRoot: '/home/runner/work/raylib-starter/raylib-starter',
+            artifact: 'dreich-linux',
+            os: 'ubuntu-latest',
+            conanBuildType: 'Debug',
+            cc: 'clang',
+            cxx: 'clang++',
+            isRelease: false,
+          }
           - {
-              name: 'MacOS',
-              wasm: 'false',
-              projectRoot: '/Users/runner/work/raylib-starter/raylib-starter',
-              artifact: 'dreich-macos',
-              os: 'macos-14',
-              conanBuildType: 'Debug',
-              cc: 'clang',
-              cxx: 'clang++',
-              isRelease: false,
-            }
+            name: 'MacOS',
+            wasm: 'false',
+            projectRoot: '/Users/runner/work/raylib-starter/raylib-starter',
+            artifact: 'dreich-macos',
+            os: 'macos-14',
+            conanBuildType: 'Debug',
+            cc: 'clang',
+            cxx: 'clang++',
+            isRelease: false,
+          }
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -101,7 +101,7 @@ jobs:
           json: ${{ toJSON(matrix.config) }}
       - uses: ./.github/workflows/utils/setup-base-libs
       - name: Game
-        uses: './.github/workflows/modules/game/build'
+        uses: './.github/workflows/modules/editor/build'
 
   building_wasm:
     name: 'Build wasm: ${{ matrix.config.name }}'
@@ -111,38 +111,38 @@ jobs:
       matrix:
         config:
           - {
-              wasm: 'true',
-              name: 'Windows',
-              projectRoot: 'D:/a/raylib-starter',
-              artifact: 'dreich-windows',
-              os: 'windows-latest',
-              conanBuildType: 'Debug',
-              cc: 'emcc',
-              cxx: 'em++',
-              isRelease: false,
-            }
+            wasm: 'true',
+            name: 'Windows',
+            projectRoot: 'D:/a/raylib-starter',
+            artifact: 'dreich-windows',
+            os: 'windows-latest',
+            conanBuildType: 'Debug',
+            cc: 'emcc',
+            cxx: 'em++',
+            isRelease: false,
+          }
           - {
-              wasm: 'true',
-              name: 'Ubuntu',
-              projectRoot: '/home/runner/work/raylib-starter/raylib-starter',
-              artifact: 'dreich-linux',
-              os: 'ubuntu-latest',
-              conanBuildType: 'Debug',
-              cc: 'emcc',
-              cxx: 'em++',
-              isRelease: false,
-            }
+            wasm: 'true',
+            name: 'Ubuntu',
+            projectRoot: '/home/runner/work/raylib-starter/raylib-starter',
+            artifact: 'dreich-linux',
+            os: 'ubuntu-latest',
+            conanBuildType: 'Debug',
+            cc: 'emcc',
+            cxx: 'em++',
+            isRelease: false,
+          }
           - {
-              wasm: 'true',
-              name: 'MacOS',
-              projectRoot: '/Users/runner/work/raylib-starter/raylib-starter',
-              artifact: 'dreich-macos',
-              os: 'macos-14',
-              conanBuildType: 'Debug',
-              cc: 'emcc',
-              cxx: 'em++',
-              isRelease: false,
-            }
+            wasm: 'true',
+            name: 'MacOS',
+            projectRoot: '/Users/runner/work/raylib-starter/raylib-starter',
+            artifact: 'dreich-macos',
+            os: 'macos-14',
+            conanBuildType: 'Debug',
+            cc: 'emcc',
+            cxx: 'em++',
+            isRelease: false,
+          }
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -155,4 +155,4 @@ jobs:
           json: ${{ toJSON(matrix.config) }}
       - uses: ./.github/workflows/utils/setup-base-libs
       - name: Game
-        uses: './.github/workflows/modules/game/build'
+        uses: './.github/workflows/modules/editor/build'

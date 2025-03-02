@@ -19,4 +19,4 @@ AllowShortBlocksOnASingleLine: Never
 PointerAlignment: Left
 
 BinPackArguments: false
-ColumnLimit: 0
+ColumnLimit: 120
