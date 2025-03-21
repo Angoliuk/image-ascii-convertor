@@ -11,7 +11,7 @@ OriginalImagePreview::OriginalImagePreview(const std::shared_ptr<ImageWithFilter
   updateImageView();
 
   layout->addWidget(label);
-};
+}
 
 void OriginalImagePreview::updateImageView() const {
   if (image->original) {
@@ -19,12 +19,11 @@ void OriginalImagePreview::updateImageView() const {
       image->original->width,
       image->original->height,
       image->original->width * image->original->channels,
-      image->isGrayscale ? QImage::Format_Grayscale8 : QImage::Format_RGB888);
-    QPixmap pixmap(QPixmap::fromImage(img));
+      image->getGrayscale() ? QImage::Format_Grayscale8 : QImage::Format_RGB888);
+    const QPixmap pixmap(QPixmap::fromImage(img));
     label->setPixmap(pixmap);
-    label->setScaledContents(true);
   }
-};
+}
 
 void OriginalImagePreview::updateImage() const {
   updateImageView();

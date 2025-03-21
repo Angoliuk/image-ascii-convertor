@@ -3,6 +3,7 @@
 #include "editor/image.hpp"
 #include "editor/utils.hpp"
 #include <QLabel>
+#include <QTextBrowser>
 #include <QWidget>
 
 class EditedImagePreview final : public QWidget {

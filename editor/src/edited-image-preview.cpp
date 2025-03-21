@@ -12,22 +12,22 @@ EditedImagePreview::EditedImagePreview(const std::shared_ptr<ImageWithFilters>& 
   updateImageView();
 
   layout->addWidget(label);
-};
+}
 
 void EditedImagePreview::updateImageView() const {
   if (image->edited) {
-    image->use();
+    image->apply();
 
     const auto img = QImage(image->edited->data.data(),
       image->edited->width,
       image->edited->height,
       image->edited->width * image->edited->channels,
-      image->isGrayscale ? QImage::Format_Grayscale8 : QImage::Format_RGB888);
+      image->getGrayscale() ? QImage::Format_Grayscale8 : QImage::Format_RGB888);
     const QPixmap pixmap(QPixmap::fromImage(img));
-    label->setPixmap(pixmap);
-    label->setScaledContents(true);
+    label->setPixmap(
+      pixmap.scaled(image->edited->width, image->edited->height, Qt::KeepAspectRatio, Qt::SmoothTransformation));
   }
-};
+}
 
 void EditedImagePreview::updateImage() const {
   updateImageView();
