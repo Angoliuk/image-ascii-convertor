@@ -1,0 +1,9 @@
+<component name="InspectionProjectProfileManager">
+  <profile version="1.0">
+    <option name="myName" value="Project Default" />
+    <inspection_tool class="CppDFAMemoryLeak" enabled="true" level="WARNING" enabled_by_default="true">
+      <option name="allocatingFunctions" value="malloc;calloc;realloc;SDL_malloc;SDL_calloc;SDL_realloc;QMalloc" />
+      <option name="deallocatingFunctions" value="free;SDL_free;QFree" />
+    </inspection_tool>
+  </profile>
+</component>
