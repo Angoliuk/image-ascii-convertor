@@ -1,38 +1,52 @@
 #include "editor/main-window.hpp"
+
+#include "editor/ascii-preview.hpp"
+#include "editor/filters-container.hpp"
 #include "editor/image-editor-container.hpp"
 #include "editor/image.hpp"
 #include <QAction>
-#include <QMenu>
 #include <QMenuBar>
 #include <QVBoxLayout>
 
 MainWindow::MainWindow() : QMainWindow() {
   setWindowTitle("Image Editor");
-  resize(400, 400);
+  resize(1200, 800);
+  this->setMinimumWidth(1200);
+  this->setMinimumHeight(800);
 
-  QMenuBar* menuBar = this->menuBar();
-  QMenu* fileMenu = menuBar->addMenu("&File");
-  QAction* openAction = new QAction("Open...", this);
-  QAction* saveAction = new QAction("Save", this);
-  QAction* saveToAction = new QAction("Save To...", this);
+  const auto menuBar = this->menuBar();
+  const auto fileMenu = menuBar->addMenu("&File");
+  const auto openAction = new QAction("Open...", this);
+  const auto saveAction = new QAction("Save", this);
 
-  //
   fileMenu->addAction(openAction);
   fileMenu->addAction(saveAction);
-  fileMenu->addAction(saveToAction);
-  fileMenu->addSeparator();
-  // fileMenu->addAction(exitAction);
-  //
-  // // Connect exit action
-  // connect(exitAction, &QAction::triggered, this, &QMainWindow::close);
 
-  const auto centralWidget = new QWidget;
-  setCentralWidget(centralWidget);
+  auto tabWidget = new QTabWidget(this);
 
-  const auto layout = new QVBoxLayout(centralWidget);
+  auto editorTab = new QWidget();
+  const auto editorLayout = new QVBoxLayout(editorTab);
 
   const auto image = std::make_shared<ImageWithFilters>();
   const auto imageEditorContainer = new ImageEditorContainer(image, this);
 
-  layout->addWidget(imageEditorContainer);
-};
+  editorLayout->addWidget(imageEditorContainer);
+
+  connect(openAction, &QAction::triggered, imageEditorContainer, &ImageEditorContainer::openAction);
+  connect(saveAction, &QAction::triggered, imageEditorContainer, &ImageEditorContainer::saveAction);
+
+  auto asciiTab = new QWidget();
+  const auto asciiLayout = new QVBoxLayout(asciiTab);
+
+  const auto asciiPreview = new AsciiPreview(image, this);
+  asciiLayout->addWidget(asciiPreview);
+
+  connect(imageEditorContainer->imagePicker, &ImagePicker::selected, asciiPreview, &AsciiPreview::updatePreview);
+  connect(
+    imageEditorContainer->filtersContainer, &FiltersContainer::changed, asciiPreview, &AsciiPreview::updatePreview);
+
+  tabWidget->addTab(editorTab, "Editor");
+  tabWidget->addTab(asciiTab, "Ascii");
+
+  this->setCentralWidget(tabWidget);
+}
