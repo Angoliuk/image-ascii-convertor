@@ -13,7 +13,7 @@ public:
 signals:
   void selected();
 
-private slots:
+public slots:
   void openFilePicker();
 
 private:
