@@ -11,7 +11,8 @@ ImageContainer::ImageContainer(const std::shared_ptr<ImageWithFilters>& image, Q
 
   layout->addWidget(originalImagePreview);
   layout->addWidget(editedImagePreview);
-};
+  layout->addStretch();
+}
 
 void ImageContainer::openedNewImage() const {
   originalImagePreview->updateImage();
